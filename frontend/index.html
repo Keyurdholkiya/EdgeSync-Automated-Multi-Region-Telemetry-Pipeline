@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EdgeSync Live Terminal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-neutral-950 text-neutral-200 font-sans p-8">
+    <div class="max-w-5xl mx-auto space-y-6">
+        <header class="flex justify-between items-center border-b border-neutral-800 pb-4">
+            <h1 class="text-2xl font-bold tracking-tight text-emerald-400">EdgeSync Node Tracker</h1>
+            <span class="bg-emerald-950 text-emerald-400 px-3 py-1 rounded-full text-xs font-mono border border-emerald-800">Cluster Status: Operational</span>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="bg-neutral-900 border border-neutral-800 p-6 rounded-xl space-y-4">
+                <h3 class="text-lg font-medium text-neutral-100">Inject Custom Event</h3>
+                <div>
+                    <label class="block text-xs text-neutral-400 mb-1">Target Service</label>
+                    <input type="text" id="service" value="auth-service-pod-1" class="w-full bg-neutral-950 border border-neutral-800 rounded p-2 text-sm text-emerald-300">
+                </div>
+                <div>
+                    <label class="block text-xs text-neutral-400 mb-1">Latency (ms)</label>
+                    <input type="number" id="latency" value="42" class="w-full bg-neutral-950 border border-neutral-800 rounded p-2 text-sm text-emerald-300">
+                </div>
+                <button onclick="dispatch()" class="w-full bg-emerald-600 hover:bg-emerald-500 text-neutral-950 py-2 rounded font-semibold transition">Push to API Gateway</button>
+            </div>
+
+            <div class="lg:col-span-2 bg-neutral-900 border border-neutral-800 p-6 rounded-xl flex flex-col">
+                <h3 class="text-lg font-medium text-neutral-100 mb-4">Live Pipeline Logs</h3>
+                <div id="terminal" class="bg-neutral-950 border border-neutral-800 rounded p-4 font-mono text-xs flex-grow overflow-y-auto max-h-64 text-emerald-400 space-y-1"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchLogs() {
+            const term = document.getElementById('terminal');
+            try {
+                const res = await fetch('/api/telemetry/stream');
+                const logs = await res.json();
+                term.innerHTML = logs.map(l => `<div><span class="text-neutral-500">[${new Date(l.timestamp).toLocaleTimeString()}]</span> <span class="text-blue-400">${l.service}</span> dispatched status <span class="text-yellow-400">SUCCESS</span> in <span class="text-orange-400">${l.latency}ms</span></div>`).join('') || 'Pipeline clear.';
+            } catch { term.innerHTML = '<div class="text-red-500">Gateway connectivity timeout.</div>'; }
+        }
+        async function dispatch() {
+            const service = document.getElementById('service').value;
+            const latency = document.getElementById('latency').value;
+            await fetch('/api/telemetry', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ service, status: "OK", latency: parseInt(latency) })
+            });
+            fetchLogs();
+        }
+        fetchLogs();
+        setInterval(fetchLogs, 4000);
+    </script>
+</body>
+</html>

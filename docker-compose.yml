@@ -1,0 +1,47 @@
+services:
+  telemetry-db:
+    image: mongo:6.0
+    container_name: telemetry-db
+    networks:
+      - edgesync-mesh
+    volumes:
+      - db-store:/data/db
+    restart: always
+
+  api-service:
+    build: ./backend
+    container_name: api-service
+    networks:
+      - edgesync-mesh
+    environment:
+      - MONGO_URI=mongodb://telemetry-db:27017/edgesync
+      - APP_PORT=5000
+    depends_on:
+      - telemetry-db
+    restart: always
+
+  ui-service:
+    build: ./frontend
+    container_name: ui-service
+    networks:
+      - edgesync-mesh
+    restart: always
+
+  edge-gateway:
+    build: ./gateway
+    container_name: edge-gateway
+    ports:
+      - "80:80"
+    networks:
+      - edgesync-mesh
+    depends_on:
+      - ui-service
+      - api-service
+    restart: always
+
+networks:
+  edgesync-mesh:
+    driver: bridge
+
+volumes:
+  db-store:

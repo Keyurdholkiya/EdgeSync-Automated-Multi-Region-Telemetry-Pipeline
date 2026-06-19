@@ -1,0 +1,9 @@
+{
+  "name": "edgesync-backend",
+  "version": "1.0.0",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.2.0"
+  }
+}
