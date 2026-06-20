@@ -1,6 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+// Load environment variables from .env file
 const app = express();
 app.use(express.json());
 
