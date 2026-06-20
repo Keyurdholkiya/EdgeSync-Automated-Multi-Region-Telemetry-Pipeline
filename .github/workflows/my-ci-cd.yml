@@ -38,10 +38,10 @@ jobs:
       - name: build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: ./nginx
-          file: ./nginx/Dockerfile
+          context: ./gateway
+          file: ./gateway/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/server:v1.0.0
+          tags: ${{ secrets.DOCKER_USERNAME }}/nginx:v1.0.0
  
   deploy:
     runs-on: ubuntu-latest
