@@ -2,65 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EdgeSync Enterprise Console</title>
+    <title>EdgeSync Enterprise Infrastructure Monitor</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans min-h-screen p-6 md:p-12">
-    <div class="max-w-6xl mx-auto space-y-8">
+<body class="bg-[#0b0f1a] text-[#c9d1d9] font-sans min-h-screen p-6 md:p-10">
+    <div class="max-w-[1400px] mx-auto space-y-10">
         
-        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-slate-200 pb-5 gap-4">
+        <!-- Enterprise Header with Context -->
+        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-[#21262d] pb-6 gap-5">
             <div>
-                <h1 class="text-2xl font-bold tracking-tight text-slate-900">EdgeSync Console</h1>
-                <p class="text-sm text-slate-500 mt-1">Multi-Region Ingestion Infrastructure</p>
+                <h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <span class="w-2.5 h-6 bg-[#21262d] rounded-sm"></span>
+                    EdgeSync Infrastructure Mesh
+                </h1>
+                <p class="text-sm text-[#8b949e] mt-1.5 font-medium">Real-Time Centralized Telemetry Aggregator</p>
             </div>
-            <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 px-4 py-1.5 rounded-lg text-xs font-semibold border border-emerald-200 shadow-sm">
-                <span class="w-2 height-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
-                Cluster: Operational
+            <div class="flex items-center gap-2.5 bg-[#161b22] text-[#3fb950] px-4 py-1.5 rounded-md text-xs font-semibold border border-[#30363d] shadow-inner">
+                <span class="w-2 h-2 rounded-full bg-[#3fb950] inline-block animate-pulse"></span>
+                Mesh Health: Connected
             </div>
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Deployment Grid (Re-organized) -->
+        <div class="grid grid-cols-1 xl:grid-cols-4 gap-8">
             
-            <div class="bg-white border border-slate-200 p-6 rounded-xl shadow-xs space-y-5">
-                <div class="border-b border-slate-100 pb-2">
-                    <h3 class="text-lg font-semibold text-slate-900">Telemetry Injector</h3>
-                    <p class="text-xs text-slate-400">Simulate cluster traffic manually</p>
+            <!-- Service Configuration Panel (Full Width on Mobile, Left on Desk) -->
+            <div class="xl:col-span-1 bg-[#161b22] border border-[#30363d] p-6 rounded-lg shadow-xl space-y-6">
+                <div class="border-b border-[#21262d] pb-3">
+                    <h3 class="text-lg font-semibold text-white">Event Simulation</h3>
+                    <p class="text-xs text-[#8b949e]">Inject custom infrastructure events into the mesh gateway.</p>
                 </div>
                 
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Target Service Node</label>
+                        <label class="block text-xs font-semibold text-[#8b949e] mb-1.5">Upstream Node Identifier</label>
                         <input type="text" id="service" value="auth-service-pod-1" 
-                               class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition">
+                               class="w-full bg-[#0b0f1a] border border-[#30363d] rounded p-2.5 text-sm font-mono text-[#c9d1d9] focus:outline-none focus:ring-1 focus:ring-[#58a6ff] transition">
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-slate-600 mb-1.5">Latency Threshold (ms)</label>
+                        <label class="block text-xs font-semibold text-[#8b949e] mb-1.5">Simulated Latency (ms)</label>
                         <input type="number" id="latency" value="42" 
-                               class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm font-mono text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition">
+                               class="w-full bg-[#0b0f1a] border border-[#30363d] rounded p-2.5 text-sm font-mono text-[#c9d1d9] focus:outline-none focus:ring-1 focus:ring-[#58a6ff] transition">
                     </div>
                     <button onclick="dispatch()" 
-                            class="w-full bg-slate-900 hover:bg-slate-800 text-white py-2.5 rounded-lg font-medium text-sm shadow-sm transition active:scale-[0.98]">
-                        Dispatch to Gateway
+                            class="w-full bg-[#1f6feb] hover:bg-[#1a5fcd] text-white py-2.5 rounded font-medium text-sm shadow transition active:scale-[0.99] active:shadow-inner">
+                        Dispatch Event
                     </button>
                 </div>
             </div>
 
-            <div class="lg:col-span-2 bg-white border border-slate-200 p-6 rounded-xl shadow-xs flex flex-col">
-                <div class="border-b border-slate-100 pb-2 mb-4 flex justify-between items-center">
+            <!-- Centralized Log Stream (Main Focus) -->
+            <div class="xl:col-span-3 bg-[#161b22] border border-[#30363d] p-6 rounded-lg shadow-xl flex flex-col">
+                <div class="border-b border-[#21262d] pb-3 mb-5 flex justify-between items-center">
                     <div>
-                        <h3 class="text-lg font-semibold text-slate-900">Live Pipeline Logs</h3>
-                        <p class="text-xs text-slate-400">Real-time upstream event log stream</p>
+                        <h3 class="text-lg font-semibold text-white">Active Telemetry Stream</h3>
+                        <p class="text-xs text-[#8b949e]">Real-time view of aggregated events passing the gateway.</p>
                     </div>
-                    <span class="text-[10px] font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">Polling: 4s</span>
+                    <span class="text-xs font-mono bg-[#0b0f1a] text-[#8b949e] px-2.5 py-1 rounded border border-[#30363d]">Gateway Port: 80 (Internal Mesh)</span>
                 </div>
                 
-                <div id="terminal" class="bg-slate-950 rounded-lg p-5 font-mono text-xs flex-grow overflow-y-auto max-h-[280px] shadow-inner space-y-2 text-slate-300">
-                    </div>
+                <!-- Advanced Log View Container -->
+                <div id="terminal" class="bg-[#0b0f1a] rounded-md p-6 font-mono text-xs flex-grow overflow-y-auto max-h-[400px] border border-[#30363d] space-y-2 text-[#8b949e]">
+                    <!-- Logs will stream here -->
+                </div>
             </div>
 
         </div>
     </div>
 
+    <!-- Script Logic (No Changes Needed Here) -->
     <script>
         async function fetchLogs() {
             const term = document.getElementById('terminal');
@@ -68,15 +79,16 @@
                 const res = await fetch('/api/telemetry/stream');
                 const logs = await res.json();
                 term.innerHTML = logs.map(l => `
-                    <div class="border-b border-slate-900/50 pb-1 last:border-0">
-                        <span class="text-slate-500">[${new Date(l.timestamp).toLocaleTimeString()}]</span> 
-                        <span class="text-blue-400 font-medium">${l.service}</span> 
-                        <span class="text-slate-400">status:</span> <span class="text-emerald-400 font-semibold">OK</span> 
-                        <span class="text-slate-400">latency:</span> <span class="text-amber-400">${l.latency}ms</span>
+                    <div class="border-b border-[#21262d]/50 pb-1.5 last:border-0 hover:bg-[#161b22]/50 px-2 rounded-sm transition">
+                        <span class="text-[#8b949e]">[${new Date(l.timestamp).toLocaleTimeString()}]</span> 
+                        <span class="text-[#58a6ff] font-medium">INFO</span>
+                        <span class="text-[#c9d1d9]">Upstream</span> 
+                        <span class="text-[#f85149] font-medium">${l.service}</span> 
+                        <span class="text-[#c9d1d9]">successfully tracked response latency</span> <span class="text-[#e3b341]">${l.latency}ms</span>.
                     </div>
-                `).join('') || '<div class="text-slate-500">Pipeline empty. Awaiting mesh telemetry...</div>';
+                `).join('') || '<div class="text-[#8b949e]">Pipeline quiet. Aggregating mesh events...</div>';
             } catch { 
-                term.innerHTML = '<div class="text-rose-400 font-medium font-sans">⚠️ API Gateway connectivity timeout. Verify proxy state.</div>'; 
+                term.innerHTML = '<div class="text-[#f85149] font-medium font-sans border-l-4 border-[#f85149] bg-[#f85149]/10 p-3 rounded">⚠️ Edge Gateway mesh connectivity timeout. Check infrastructure health.</div>'; 
             }
         }
         
@@ -91,10 +103,10 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ service, status: "OK", latency: parseInt(latency) })
                 });
-                document.getElementById('latency').value = Math.floor(Math.random() * 100) + 10; // Random next value
+                document.getElementById('latency').value = Math.floor(Math.random() * 80) + 5; 
                 fetchLogs();
             } catch(e) {
-                console.error("Transmission failed", e);
+                console.error("Transmission fault detected", e);
             }
         }
         
