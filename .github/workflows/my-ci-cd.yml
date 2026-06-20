@@ -2,7 +2,7 @@ name: this is full ci and cd automation
 on:
   push:
     branches:
-      - main
+      - keyur
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
