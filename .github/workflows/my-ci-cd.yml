@@ -25,7 +25,7 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:v1.0.0
+          tags: ${{ secrets.DOCKER_USERNAME }}/frontend:v1.0.1
       
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
