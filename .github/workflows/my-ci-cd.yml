@@ -41,7 +41,7 @@ jobs:
           context: ./nginx
           file: ./nginx/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/nginx:v1.0.0
+          tags: ${{ secrets.DOCKER_USERNAME }}/server:v1.0.0
  
   deploy:
     runs-on: ubuntu-latest
