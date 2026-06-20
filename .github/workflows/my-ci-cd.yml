@@ -56,8 +56,8 @@ jobs:
           key: ${{ secrets.SERVER_SSH}}
           script: |
             cd /home/ubuntu/EdgeSync
-            docker-compose down
-            docker-compose pull backend
-            docker-compose pull frontend
-            docker-compose pull gateway
-            docker-compose up -d
+            docker compose down
+            docker compose pull backend
+            docker compose pull frontend
+            docker compose pull gateway
+            docker compose up -d
